@@ -1,5 +1,5 @@
 import { searchCep } from './helpers/cepFunctions';
-import { fetchProductsList } from './helpers/fetchFunctions';
+import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
 import { createProductElement } from './helpers/shopFunctions';
 import './style.css';
 
@@ -21,7 +21,7 @@ const exibeProdutos = async () => {
     });
     load.remove();
     erro.remove();
-    if (!api) ;
+    fetchProduct('MLB1405519561');
   } catch (e) {
     throw new Error('Algum erro ocorreu, recarregue a página e tente novamente');
   }
@@ -33,6 +33,7 @@ const carregando = () => {
   products.appendChild(loading);
   loading.innerHTML = 'Carregando...';
 };
+
 window.onload = function onload() {
   exibeProdutos();
 };
