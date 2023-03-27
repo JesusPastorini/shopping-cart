@@ -1,6 +1,7 @@
+import { saveCartID } from './helpers/cartFunctions';
 import { searchCep } from './helpers/cepFunctions';
 import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
-import { createProductElement } from './helpers/shopFunctions';
+import { createCartProductElement, createProductElement } from './helpers/shopFunctions';
 import './style.css';
 
 const products = document.querySelector('.products');
@@ -22,6 +23,7 @@ const exibeProdutos = async () => {
     load.remove();
     erro.remove();
     fetchProduct('MLB1405519561');
+    adicionaCar();
   } catch (e) {
     throw new Error('Algum erro ocorreu, recarregue a página e tente novamente');
   }
@@ -32,6 +34,21 @@ const carregando = () => {
   loading.className = 'loading';
   products.appendChild(loading);
   loading.innerHTML = 'Carregando...';
+};
+
+const adicionaCar = () => {
+  const botaoCar = document.querySelectorAll('.product__add');
+  const carProducts = document.querySelector('.cart__products');
+  
+  botaoCar.forEach((btn) => {
+    btn.addEventListener('click', async (event) => {
+      const idBtn = event.target.parentNode.firstChild.innerHTML;
+      const exibeItemCar = createCartProductElement(await fetchProduct(idBtn));
+      carProducts.appendChild(exibeItemCar);
+      saveCartID(idBtn);
+    });
+  });
+
 };
 
 window.onload = function onload() {
