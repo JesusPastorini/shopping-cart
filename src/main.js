@@ -1,5 +1,5 @@
 import { saveCartID } from './helpers/cartFunctions';
-import { searchCep } from './helpers/cepFunctions';
+import { getAddress, searchCep } from './helpers/cepFunctions';
 import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
 import { createCartProductElement, createProductElement } from './helpers/shopFunctions';
 import './style.css';
